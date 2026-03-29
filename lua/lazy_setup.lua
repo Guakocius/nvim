@@ -40,5 +40,4 @@ require("lazy").setup({
 require("lspconfig").ts_ls.setup {
   root_dir = require("lspconfig.util").root_pattern("tsconfig.json", "package.json", ".git"),
 }
-
 require("keymaps").setup()

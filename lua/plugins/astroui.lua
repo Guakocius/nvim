@@ -36,4 +36,38 @@ return {
       LSPLoading10 = "⠏",
     },
   },
+  {
+    "numToStr/Comment.nvim",
+    enabled = true,
+  },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+    config = function() require("ufo").setup() end,
+  },
+  {
+    "luukvbaal/statuscol.nvim",
+    config = function()
+      local builtin = require "statuscol.builtin"
+      require("statuscol").setup {
+        relculright = true,
+        segments = {
+          { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+          {
+            sign = { namespace = { "diagnostic/signs" }, maxwidth = 2, auto = true },
+            click = "v:lua.ScSa",
+          },
+          { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+          {
+            sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
+            click = "v:lua.ScSa",
+          },
+        },
+      }
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    config = function() require("nvim-dap").setup() end,
+  },
 }

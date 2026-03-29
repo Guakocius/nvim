@@ -26,6 +26,14 @@ return {
           "lua",
           "scala",
           "sc",
+          "rs",
+          "c",
+          "cpp",
+          "sh",
+          "css",
+          "html",
+          "js",
+          "ts",
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
@@ -48,6 +56,21 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
+      ["rust-analyzer"] = {
+        cargo = {
+          features = "all",
+        },
+        --    checkOnSave = {
+        --      command = "clippy",
+        --    },
+      },
+      ["cssls"] = {
+        settings = {
+          css = {
+            validate = false,
+          },
+        },
+      },
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
     },
     -- customize how language servers are attached
