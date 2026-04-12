@@ -1,0 +1,275 @@
+vim.g.mapleader = " " -- set the mapleader to Space
+vim.g.maplocalleader = " " -- the same as mapleader
+
+local opts = { noremap = true, silent = true }
+
+-- vim.keymap.set({ 'n', 'v' }, '<C-N>', '<Nop>', opts)
+
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", opts)
+
+vim.keymap.set({ "n", "v" }, "<C-F>", "?", { desc = "Search" })
+
+-- vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
+-- quit file
+-- vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', opts)
+
+-- delete a single char w/o copying into register
+vim.keymap.set("n", "x", "\"_x", opts)
+
+-- find the center
+vim.keymap.set({ "n", "v" }, "<leader>m", "50%<CR>", opts)
+-- vim.keymap.set('n', 'N', 'Nzzzv', opts)
+
+-- showkeysToggle
+vim.keymap.set("n", "<leader>sk", ":ShowkeysToggle<CR>", { desc = "Toggling Showkeys" })
+
+-- disable CR in 'n' and 'v'
+opts.desc = "disable CR"
+vim.api.nvim_set_keymap("n", "<CR>", "<Nop>", opts)
+vim.api.nvim_set_keymap("v", "<CR>", "<Nop>", opts)
+
+-- opts.desc = 'Jump to last char/letter'
+-- vim.api.nvim_set_keymap('n', 'E', '$', opts)
+-- vim.api.nvim_set_keymap('v', 'E', '$', opts)
+
+-- align in visual mode
+vim.keymap.set("v", "<Tab>", ">gv", { desc = "Shift" })
+vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Shift" })
+
+-- Resize with arrows
+-- vim.keymap.set( 'n', '<Up>', ':resize -2<CR>', opts )
+-- vim.keymap.set( 'n', '<Down>', ':resize +2<CR>', opts)
+-- vim.keymap.set( 'n', '<Left>', ':vertical resize -2<CR>', opts )
+-- vim.keymap.set( 'n', '<Right>', ':vertical resize +2<CR>', opts)
+
+-- Disable arrows
+vim.keymap.set("n", "<Up>", ":echo \"use k!\"<CR>", opts)
+vim.keymap.set("n", "<Down>", ":echo \"use j!\"<CR>", opts)
+vim.keymap.set("n", "<Left>", ":echo \"use h!\"<CR>", opts)
+vim.keymap.set("n", "<Right>", ":echo \"use l!\"<CR>", opts)
+
+-- Disable / Enable Tabnine
+-- vim.keymap.set('n', '<leader>mm', ':TabnineDisable<CR>', { desc = 'Tabnine: disable' })
+-- vim.keymap.set('n', '<leader>m', ':TabnineEnable<CR>', { desc = 'Tabnine: enable' })
+
+-- Buffers
+opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "next buffer" })
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { desc = "previous buffer" })
+-- vim.keymap.set( 'n', '<leader>x', ':Bdelete!<CR>', opts )
+vim.keymap.set("n", "<leader>b", ":<cmd> enew <CR>", { desc = "new buffer" })
+
+-- Window management
+-- vim.keymap.set('n', '<leader>v', '<C-w>v', { desc = "[V]ertical Split" })   -- vertical split
+vim.keymap.set("n", "<leader>v", function()
+  vim.cmd "vs"
+  vim.cmd.wincmd "L"
+  vim.api.nvim_win_set_width(0, 100)
+end, { desc = "[V]ertical Split" })
+-- vim.keymap.set('n', '<leader>h', '<C-w>s', { desc = "[H]orizontal Split" }) -- horizontal split
+vim.keymap.set("n", "<leader>h", function()
+  vim.cmd "split"
+  vim.cmd.wincmd "J"
+  vim.api.nvim_win_set_height(0, 20)
+end, { desc = "[H]orizontal Split" })
+vim.keymap.set("n", "<leader>x", ":Bdelete!<CR>", { desc = "Delete buffer" })
+vim.keymap.set("n", "<leader>sx", ":close<CR>", { desc = "Close buffer" })
+
+-- Navigation betw
+vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", opts)
+vim.keymap.set("n", "<C-j>", ":wincmd j<CR>", opts)
+vim.keymap.set("n", "<C-h>", ":wincmd h<CR>", opts)
+vim.keymap.set("n", "<C-l>", ":wincmd l<CR>", opts)
+
+-- Taps
+-- vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts)
+-- vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts)
+-- vim.keymap.set('n', '<leader>tn', ':tabn<CR>', opts)
+-- vim.keymap.set('n', '<leader>tp', ':tabp<CR>', opts)
+
+-- Toggle line wrapping
+-- vim.keymap.set('n', '<leader>lw', '<cmd> set wrap!<CR>', opts)
+
+-- Stay in indent mode
+vim.keymap.set("v", "<", "<gv", opts)
+vim.keymap.set("v", ">", ">gv", opts)
+
+-- keep last yanked when pasting
+vim.keymap.set("v", "p", "\"_dP", opts)
+
+vim.keymap.set("n", "<leader>kk", function()
+  if vim.o.relativenumber == true then
+    vim.o.relativenumber = false
+  else
+    vim.o.relativenumber = true
+  end
+end, { desc = "reverse polarity of relativenumbers" })
+-- -- Diagnostic keymaps
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'goto previous Diagnostic' })
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'goto next Diagnostic' })
+-- -- vim.keymap.set( 'n', '<leader>d', vim.diagnostic.open_float, { desc = 'Diagnostic: open float'} )
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Diagnostic: set loc list' })
+
+-- vim.api.nvim_set_hl(0, 'Visual', { fg = "#E06C75" })
+-- Terminal
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", opts)
+-- vim.keymap.set('t', '<C-e>', '<cmd> q <CR> :bnext<CR> :Bdelete!<CR>', opts)
+-- vim.keymap.set('t', '<C-q>', '<C-\\><C-n> :wincmd h<CR>', opts)
+vim.keymap.set("n", "<C-t>", function()
+  vim.cmd "split"
+  vim.cmd "term"
+end, { desc = "Open terminal" })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+  end,
+})
+
+-- vim.keymap.set('n', '<space>t', function()
+--     vim.cmd('vs')
+--     vim.cmd('term')
+-- end, { desc = 'Open terminal' })
+
+local function compile_and_run_java()
+  vim.ui.input("Enter package name: ", function(package_name)
+    if package_name then
+      local file_name_without_extension = vim.fn.expand "%:t:r"
+      local class_name = package_name .. "/" .. file_name_without_extension
+      vim.cmd("term cd " .. vim.fn.expand "%:p:h" .. " && javac *.java && cd .. && kitty --hold java " .. class_name)
+    else
+      -- vim.cmd('term cd ' .. vim.fn.expand('%:p:h') .. ' && javac ' .. vim.fn.expand('%'))
+      vim.cmd("term cd " .. vim.fn.expand "%:p:h" .. " && javac *.java && kitty --hold java " .. vim.fn.expand "%:t:r")
+    end
+  end)
+end
+
+local function compile_and_Args()
+  vim.ui.input("Enter package name: ", function(package_name)
+    if package_name then
+      vim.ui.input("Enter Arguments: ", function(arguments)
+        if arguments then
+          local file_name_without_extension = vim.fn.expand "%:t:r" -- Dateiname ohne Erweiterung
+          local class_name = package_name .. "/" .. file_name_without_extension -- Kombiniere Paketnamen und Dateinamen
+          vim.cmd(
+            "term cd "
+              .. vim.fn.expand "%:p:h"
+              .. " && javac *.java && cd .. && java "
+              .. class_name
+              .. " "
+              .. arguments
+          )
+        end
+      end)
+    end
+  end)
+end
+
+vim.api.nvim_create_augroup("exe_java", { clear = false })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "exe_java",
+  pattern = "java",
+  callback = function()
+    vim.keymap.set("n", "<C-C>", compile_and_Args, { noremap = true, silent = true })
+    -- vim.keymap.set('n', '<C-P>', compile_and_run_java, { noremap = true, silent = true })
+  end,
+})
+
+local function con_sql()
+  vim.ui.input("Enter a user: ", function(user_name)
+    if user_name then
+      vim.ui.input("Enter database_name: ", function(db_name)
+        if db_name then
+          vim.cmd("term cd " .. vim.fn.expand "%:p:h" .. " && psql -U " .. user_name .. " -d " .. db_name)
+        end
+      end)
+    end
+  end)
+end
+
+local function compiling_u_sql()
+  vim.ui.input("Enter a user: ", function(sql_user)
+    if sql_user then
+      vim.cmd("term cd " .. vim.fn.expand "%:p:h" .. " && psql -U " .. sql_user .. " -f " .. vim.fn.expand "%p")
+    end
+  end)
+end
+
+local function exec_ipynb() vim.cmd("term jupyter-notebook " .. vim.fn.expand "%") end
+
+vim.api.nvim_create_user_command("RunAmm", function()
+  local file = vim.fn.expand "%:p"
+  vim.fn.jobstart({ "kitty", "--hold", "bash", "-c", "amm < " .. file }, { detach = true })
+end, {})
+local function running_programs()
+  vim.ui.input("Enter FileType: ", function(fType)
+    if fType == "sc" then
+      vim.cmd "RunAmm"
+    elseif fType == "scala" then
+      vim.cmd("term scalac " .. vim.fn.expand "%" .. " && kitty --hold scala " .. vim.fn.expand "%")
+    elseif fType == "m" then
+      vim.cmd("term kitty --hold octave " .. vim.fn.expand "%")
+    elseif fType == "java" then
+      compile_and_run_java()
+    elseif fType == "py" then
+      vim.cmd("term kitty --hold python " .. vim.fn.expand "%")
+    elseif fType == "sbt" then
+      vim.cmd "term kitty --hold sbt run"
+    elseif fType == "sbttest" then
+      vim.cmd "term kitty --hold sbt test"
+    elseif fType == "sbtcoverage" then
+      vim.cmd "term kitty --hold sbt clean coverage test coverageReport"
+    elseif fType == "ipynb" then
+      exec_ipynb()
+    elseif fType == "rustb" then
+      vim.cmd "term cargo build && cargo run"
+    elseif fType == "rust" then
+      vim.cmd "term cargo run"
+    end
+  end)
+end
+
+vim.keymap.set("n", "<C-P>", running_programs, { desc = "running program types" })
+
+vim.api.nvim_create_augroup("exe_sql", { clear = false })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "exe_sql",
+  pattern = "sql",
+  callback = function()
+    vim.keymap.set("n", "<C-P>", con_sql, { desc = "Connecting with user to a database" })
+    vim.keymap.set("n", "<C-C>", compiling_u_sql, { desc = "Compiling sql-file with a written user" })
+    vim.keymap.set("n", "<C-B>", compiling_sql, { desc = "Compiling sql-file with timothy user" })
+  end,
+})
+
+vim.api.nvim_create_augroup("exe_valgrind", { clear = false })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = "exe_valgrind",
+  pattern = { "c", "cpp" },
+  callback = function()
+    vim.keymap.set(
+      "n",
+      "<C-C>",
+      ":term valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all -s ./%< ",
+      { desc = "executing and showing valgrind leaks" }
+    )
+  end,
+})
+
+-- NPM Live Server
+vim.keymap.set(
+  "n",
+  "<leader>ls",
+  function()
+    vim.fn.jobstart({ "live-server" }, {
+      detach = true,
+      cwd = vim.fn.getcwd(),
+    })
+  end,
+  { desc = "Start live-server in background" }
+)
