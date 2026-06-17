@@ -6,6 +6,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.rustaceanvim = {
+  tools = {},
+  server = {
+    on_attach = function(client, bufnr) end,
+    default_settings = {
+      ["rust-analyzer"] = {},
+    },
+  },
+  dap = {},
+}
+
 require("lazy").setup {
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -29,6 +40,8 @@ require("lazy").setup {
     require "plugins.lsp.lspconfig",
     require "plugins.lsp.mason",
     require "plugins.lsp.autoformat",
+    require "plugins.lsp.rust-analyzer",
+
     -- colorschemes
     require "plugins.colorschemes.cyberdream",
     -- not lsp
@@ -37,7 +50,9 @@ require("lazy").setup {
     require "plugins.autotag",
     require "plugins.bufferline",
     require "plugins.cmp",
+    require "plugins.cord",
     require "plugins.fterm",
+    require "plugins.jdtls",
     require "plugins.lualine",
     require "plugins.neotree",
     require "plugins.telescope",
@@ -49,6 +64,7 @@ require("lazy").setup {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
+        rust = { "prettierd", "prettier", stop_after_first = true },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         javascriptreact = { "prettierd", "prettier", stop_after_first = true },
         typescript = { "prettierd", "prettier", stop_after_first = true },

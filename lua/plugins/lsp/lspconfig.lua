@@ -1,5 +1,4 @@
-return
-{
+return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
@@ -17,11 +16,12 @@ return
     end
 
     -- configure html server
-    -- lspconfig["html"].setup({
-    --     capabilities = capabilities,
-    --     on_attach = on_attach,
-    -- })
-    vim.lsp.enable("html")
+    --lspconfig["html"].setup {
+    --  capabilities = capabilities,
+    --  on_attach = on_attach,
+    --}
+
+    vim.lsp.enable "html"
     vim.lsp.config("html", {
       capabilities = capabilities,
     })
@@ -31,17 +31,28 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("matlab_ls")
+    vim.lsp.enable "matlab_ls"
     vim.lsp.config("matlab_ls", {
       capabilities = capabilities,
     })
 
+    --lspconfig["hls"].setup {
+    --  capabilities = capabilities,
+    --  on_attach = on_attach,
+    --}
+
+    vim.lsp.enable "hls"
+    vim.lsp.config("hls", {
+      capabilities = capabilities,
+    })
+
     -- configure css server
-    -- lspconfig["cssls"].setup({
-    --     capabilities = capabilities,
-    --     on_attach = on_attach,
-    -- })
-    vim.lsp.enable("cssls")
+    --lspconfig["cssls"].setup {
+    --  capabilities = capabilities,
+    --  on_attach = on_attach,
+    --}
+
+    vim.lsp.enable "cssls"
     vim.lsp.config("cssls", {
       capabilities = capabilities,
     })
@@ -50,7 +61,7 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("sqls")
+    vim.lsp.enable "sqls"
     vim.lsp.config("sqls", {
       capabilities = capabilities,
     })
@@ -59,7 +70,7 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("sqlls")
+    vim.lsp.enable "sqlls"
     vim.lsp.config("sqlls", {
       capabilities = capabilities,
     })
@@ -69,7 +80,7 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("tailwindcss")
+    vim.lsp.enable "tailwindcss"
     vim.lsp.config("tailwindcss", {
       capabilities = capabilities,
     })
@@ -78,16 +89,17 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("jsonls")
+    vim.lsp.enable "jsonls"
     vim.lsp.config("jsonls", {
       capabilities = capabilities,
     })
     -- configure bash server
-    -- lspconfig["bashls"].setup({
-    --     capabilities = capabilities,
-    --     on_attach = on_attach,
-    -- })
-    vim.lsp.enable("bashls")
+    --lspconfig["bashls"].setup {
+    --  capabilities = capabilities,
+    --  on_attach = on_attach,
+    --}
+
+    vim.lsp.enable "bashls"
     vim.lsp.config("bashls", {
       capabilities = capabilities,
     })
@@ -97,7 +109,7 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("arduino_language_server")
+    vim.lsp.enable "arduino_language_server"
     vim.lsp.config("arduino_language_server", {
       capabilities = capabilities,
     })
@@ -119,7 +131,7 @@ return
     --     on_attach = on_attach,
     --     filetypes = { "html", "css", "sass", "scss", "less", "svelte" },
     -- })
-    vim.lsp.enable("emmet_ls")
+    vim.lsp.enable "emmet_ls"
     vim.lsp.config("emmet_ls", {
       capabilities = capabilities,
       filetypes = { "html", "css", "sass", "scss", "less", "svelte" },
@@ -130,7 +142,7 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("pyright")
+    vim.lsp.enable "pyright"
     vim.lsp.config("pyright", {
       capabilities = capabilities,
     })
@@ -145,7 +157,7 @@ return
     --     on_attach = on_attach,
     -- })
 
-    vim.lsp.enable("graphql")
+    vim.lsp.enable "graphql"
     vim.lsp.config("graphql", {
       capabilities = capabilities,
     })
@@ -154,7 +166,7 @@ return
     --     on_attach = on_attach,
     -- })
 
-    vim.lsp.enable("rust_analyzer")
+    vim.lsp.enable "rust_analyzer"
     vim.lsp.config("rust_analyzer", {
       capabilities = capabilities,
     })
@@ -162,7 +174,7 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("cmake")
+    vim.lsp.enable "cmake"
     vim.lsp.config("cmake", {
       capabilities = capabilities,
     })
@@ -183,9 +195,7 @@ return
         "--clang-tidy",
       },
       handlers = {
-        ["window/showMessage"] = function(err, method, params, client_id)
-          print(vim.inspect(params))
-        end,
+        ["window/showMessage"] = function(err, method, params, client_id) print(vim.inspect(params)) end,
       },
     })
 
@@ -193,7 +203,7 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("jdtls")
+    vim.lsp.enable "jdtls"
     vim.lsp.config("jdtls", {
       capabilities = capabilities,
     })
@@ -202,47 +212,48 @@ return
     --     capabilities = capabilities,
     --     on_attach = on_attach,
     -- })
-    vim.lsp.enable("texlab")
+    vim.lsp.enable "texlab"
     vim.lsp.config("texlab", {
       capabilities = capabilities,
     })
 
-
     -- require 'lspconfig'.lua_ls.setup {
-    vim.lsp.enable("lua_ls")
+    vim.lsp.enable "lua_ls"
     vim.lsp.config("lua_ls", {
       on_init = function(client)
         if client.workspace_folders then
           local path = client.workspace_folders[1].name
-          if path ~= vim.fn.stdpath('config') and (vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc')) then
+          if
+            path ~= vim.fn.stdpath "config"
+            and (vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc"))
+          then
             return
           end
         end
 
-        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
           runtime = {
             -- Tell the language server which version of Lua you're using
             -- (most likely LuaJIT in the case of Neovim)
-            version = 'LuaJIT'
+            version = "LuaJIT",
           },
           -- Make the server aware of Neovim runtime files
           workspace = {
             checkThirdParty = false,
             library = {
-              vim.env.VIMRUNTIME
+              vim.env.VIMRUNTIME,
               -- Depending on the usage, you might want to add additional paths here.
               -- "${3rd}/luv/library"
               -- "${3rd}/busted/library",
-            }
+            },
             -- or pull in all of 'runtimepath'. NOTE: this is a lot slower and will cause issues when working on your own configuration (see https://github.com/neovim/nvim-lspconfig/issues/3189)
             -- library = vim.api.nvim_get_runtime_file("", true)
-          }
+          },
         })
       end,
       settings = {
-        Lua = {}
-      }
-    }
-    )
+        Lua = {},
+      },
+    })
   end,
 }
