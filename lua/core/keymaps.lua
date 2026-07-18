@@ -133,3 +133,14 @@ vim.keymap.set(
   end,
   { desc = "Start live-server in background" }
 )
+
+-- Rust Keymaps
+local bufnr = vim.api.nvim_get_current_buf()
+
+vim.keymap.set("n", "K", function() vim.cmd.RustLsp { "hover", "actions" } end, { buffer = bufnr, silent = true })
+
+vim.keymap.set("n", "<leader>a", function() vim.cmd.RustLsp "codeAction" end, { buffer = bufnr, silent = true })
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
+vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
