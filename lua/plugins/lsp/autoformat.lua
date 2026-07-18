@@ -3,9 +3,9 @@ return {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local conform = require("conform")
+      local conform = require "conform"
 
-      conform.setup({
+      conform.setup {
         formatters_by_ft = {
           lua = { "stylua" },
           c = { "clang-format" },
@@ -25,29 +25,30 @@ return {
 
           java = { "google-java-format" },
           kotlin = { "ktlint" },
-          ruby = { "standardrb" },
-          erb = { "htmlbeautifier" },
           bash = { "beautysh" },
           proto = { "buf" },
           rust = { "rustfmt" },
-          yaml = { "yamlfix" },
           toml = { "taplo" },
-          sql = { "sql-formatter" },
         },
 
         format_on_save = {
           timeout_ms = 500,
           lsp_format = "fallback",
         },
-      })
+      }
 
-      vim.keymap.set({ "n", "v" }, "<leader>f", function()
-        conform.format({
-          async = false,
-          timeout_ms = 500,
-          lsp_format = "fallback",
-        })
-      end, { desc = "Format file or range" })
+      vim.keymap.set(
+        { "n", "v" },
+        "<leader>f",
+        function()
+          conform.format {
+            async = false,
+            timeout_ms = 500,
+            lsp_format = "fallback",
+          }
+        end,
+        { desc = "Format file or range" }
+      )
     end,
   },
 }

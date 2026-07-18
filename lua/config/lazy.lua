@@ -14,7 +14,6 @@ require("lazy").setup {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-      -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
     },
   },
   {
@@ -25,14 +24,15 @@ require("lazy").setup {
     event = "VeryLazy",
   },
   {
-    -- lsp
     require "plugins.lsp.lspconfig",
     require "plugins.lsp.mason",
     require "plugins.lsp.autoformat",
-    -- colorschemes
+    require "plugins.lsp.lua",
+
     require "plugins.colorschemes.cyberdream",
-    -- not lsp
+
     require "plugins.aerial",
+    require "plugins.arduino",
     require "plugins.autopairs",
     require "plugins.autotag",
     require "plugins.bufferline",
@@ -40,6 +40,7 @@ require("lazy").setup {
     require "plugins.fterm",
     require "plugins.lualine",
     require "plugins.neotree",
+    require "plugins.presence",
     require "plugins.telescope",
     require "plugins.treesitter",
     require "plugins.vimtex",

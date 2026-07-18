@@ -1,10 +1,9 @@
 return {
-  'stevearc/aerial.nvim',
+  "stevearc/aerial.nvim",
   backends = { "treesitter", "lsp", "markdown", "man" },
   opts = {},
-  -- Optional dependencies
   dependencies = {
-     "nvim-treesitter/nvim-treesitter",
-     "nvim-tree/nvim-web-devicons"
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-tree/nvim-web-devicons",
   },
 }
