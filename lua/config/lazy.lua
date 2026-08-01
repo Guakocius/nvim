@@ -42,7 +42,7 @@ require("lazy").setup {
     require "plugins.lsp.mason",
     require "plugins.lsp.mini_indentscope",
     require "plugins.lsp.rust-analyzer",
-    require "lua.plugins.lsp.vim_matchup",
+    require "plugins.lsp.vim_matchup",
 
     require "plugins.colorschemes.cyberdream",
 
