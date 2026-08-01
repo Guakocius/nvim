@@ -15,21 +15,22 @@ return {
     end
 
     local lstypes = {
-      "html",
-      "cssls",
-      "tailwindcss",
-      "jsonls",
-      "bashls",
       "arduino_language_server",
-      "pkgbuild_language_server",
+      "asm_lsp",
+      "bashls",
+      "clangd",
+      "cmake",
+      "cssls",
       "emmet_ls",
+      "html",
+      "jsonls",
+      "lua_ls",
+      "nu",
+      "pkgbuild_language_server",
       "pyright",
       "rust_analyzer",
-      "cmake",
-      "clangd",
-      "asm_lsp",
+      "tailwindcss",
       "texlab",
-      "lua_ls",
     }
 
     for _, ls in ipairs(lstypes) do
@@ -79,6 +80,15 @@ return {
           settings = {
             Lua = {},
           },
+        })
+      elseif ls == "nu" then
+        vim.lsp.config(ls, {
+          capabilities = capabilities,
+          cmd = {
+            "nu",
+            "--lsp",
+          },
+          filetypes = { "nu" },
         })
       else
         vim.lsp.config(ls, {

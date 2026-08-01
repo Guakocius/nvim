@@ -10,6 +10,7 @@ return {
       }
       require("nvim-treesitter").install {
         "lua",
+        "nu",
         "python",
         "javascript",
         "typescript",
